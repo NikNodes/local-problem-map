@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<title>CityFix - Smart City Problem Reporter</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">CityFix</div>
+
+<nav>
+
+<a href="#">Home</a> <a href="#">Report</a> <a href="#">Dashboard</a>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<h1>Fix Your City Together</h1>
+
+<p>Report civic problems directly on the map and help improve your city.</p>
+
+<button id="reportBtn">Report Issue</button>
+
+</section>
+
+<section class="dashboard">
+
+<div class="card">
+<h3>Total Issues</h3>
+<p id="totalIssues">0</p>
+</div>
+
+<div class="card">
+<h3>Resolved</h3>
+<p>0</p>
+</div>
+
+<div class="card">
+<h3>Pending</h3>
+<p>0</p>
+</div>
+
+</section>
+
+<section class="chart-section">
+
+<canvas id="issueChart"></canvas>
+
+</section>
+
+<section class="map-section">
+
+<div id="map"></div>
+
+</section>
+
+<div id="reportModal" class="modal">
+
+<div class="modal-content">
+
+<h2>Report Issue</h2>
+
+<form id="problemForm">
+
+<input type="text" id="name" placeholder="Your Name" required>
+
+<select id="category" required>
+
+<option value="">Select Problem</option>
+<option>Road Damage</option>
+<option>Garbage</option>
+<option>Water Leakage</option>
+<option>Street Light</option>
+
+</select>
+
+<textarea id="description" placeholder="Describe the problem"></textarea>
+
+<button type="submit">Submit</button>
+
+</form>
+
+</div>
+
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
