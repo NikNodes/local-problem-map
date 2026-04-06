@@ -30,25 +30,26 @@ iconSize:[25,41]
 function getIcon(category){
 
 if(category=="Road Damage") return redIcon
-
 if(category=="Garbage") return yellowIcon
-
 if(category=="Street Light") return blueIcon
-
 if(category=="Water Leakage") return greenIcon
 
 return redIcon
 }
 
+/* MAP CLICK */
 map.on("click",function(e){
 
 selectedLat=e.latlng.lat
 selectedLng=e.latlng.lng
 
-document.getElementById("reportModal").style.display="block"
+document.getElementById("closeModal").onclick=function(){
+document.getElementById("reportModal").style.display="none"
+}
 
 })
 
+/* FORM SUBMIT */
 document.getElementById("problemForm").addEventListener("submit",function(e){
 
 e.preventDefault()
@@ -66,35 +67,9 @@ document.getElementById("reportModal").style.display="none"
 
 })
 
+/* FLOATING BUTTON */
 document.getElementById("reportBtn").onclick=function(){
 
-document.getElementById("reportModal").style.display="block"
+document.getElementById("reportModal").style.display="flex"
 
 }
-
-var ctx = document.getElementById('issueChart')
-
-new Chart(ctx,{
-
-type:'bar',
-
-data:{
-labels:['Road','Garbage','Water','Light'],
-
-datasets:[{
-
-label:'Reported Issues',
-
-data:[12,19,5,8],
-
-borderWidth:1
-
-}]
-
-},
-
-options:{
-responsive:true
-}
-
-})

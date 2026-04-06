@@ -3,7 +3,6 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <title>CityFix - Smart City Problem Reporter</title>
 
@@ -25,59 +24,31 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <div class="logo">CityFix</div>
 
 <nav>
-
-<a href="#">Home</a> <a href="#">Report</a> <a href="#">Dashboard</a>
-
+<a href="#">Home</a>
+<a href="#">Dashboard</a>
 </nav>
 
 </header>
 
-<section class="hero">
-
-<h1>Fix Your City Together</h1>
-
-<p>Report civic problems directly on the map and help improve your city.</p>
-
-<button id="reportBtn">Report Issue</button>
-
-</section>
-
-<section class="dashboard">
-
-<div class="card">
-<h3>Total Issues</h3>
-<p id="totalIssues">0</p>
-</div>
-
-<div class="card">
-<h3>Resolved</h3>
-<p>0</p>
-</div>
-
-<div class="card">
-<h3>Pending</h3>
-<p>0</p>
-</div>
-
-</section>
-
-<section class="chart-section">
-
-<canvas id="issueChart"></canvas>
-
-</section>
-
-<section class="map-section">
+<!-- FULL SCREEN MAP -->
 
 <div id="map"></div>
 
-</section>
+<!-- FLOATING BUTTON -->
+
+<button id="reportBtn" class="floating-btn">+ Report Issue</button>
+
+<!-- MODAL -->
 
 <div id="reportModal" class="modal">
 
 <div class="modal-content">
-
+<span id="closeModal" class="close-btn">❌</span>
 <h2>Report Issue</h2>
+
+<p style="font-size:14px;color:gray;">
+Fill the details below
+</p>
 
 <form id="problemForm">
 
