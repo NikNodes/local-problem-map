@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>CityFix - Smart City Problem Reporter</title>
-
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/684/684908.png">
 <link rel="stylesheet" href="style.css">
 
 <link rel="stylesheet"
@@ -13,33 +13,25 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </head>
 
 <body>
 
 <header>
-
 <div class="logo">CityFix</div>
-
 <nav>
 <a href="#">Home</a>
 <a href="#">Dashboard</a>
 </nav>
-
 </header>
 
 <!-- FULL SCREEN MAP -->
-
 <div id="map"></div>
 
 <!-- FLOATING BUTTON -->
-
 <button id="reportBtn" class="floating-btn">+ Report Issue</button>
 
 <!-- MODAL -->
-
 <div id="reportModal" class="modal">
 
 <div class="modal-content">
@@ -47,7 +39,7 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <h2>Report Issue</h2>
 
 <p style="font-size:14px;color:gray;">
-Fill the details below
+Map pe click karke location select karo, phir details bharo
 </p>
 
 <form id="problemForm">
@@ -55,16 +47,14 @@ Fill the details below
 <input type="text" id="name" placeholder="Your Name" required>
 
 <select id="category" required>
-
 <option value="">Select Problem</option>
 <option>Road Damage</option>
 <option>Garbage</option>
 <option>Water Leakage</option>
 <option>Street Light</option>
-
 </select>
 
-<textarea id="description" placeholder="Describe the problem"></textarea>
+<textarea id="description" placeholder="Describe the problem" rows="3"></textarea>
 
 <button type="submit">Submit</button>
 
@@ -75,7 +65,6 @@ Fill the details below
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <script src="script.js"></script>
 
 </body>
