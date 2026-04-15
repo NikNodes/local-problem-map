@@ -1,71 +1,153 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
-<title>CityFix - Smart City Problem Reporter</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CityFix — Smart City Problem Reporter</title>
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/684/684908.png">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <link rel="stylesheet" href="style.css">
-
-<link rel="stylesheet"
-href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
 </head>
-
 <body>
 
-<header>
-<div class="logo">CityFix</div>
-<nav>
-<a href="#">Home</a>
-<a href="#">Dashboard</a>
-</nav>
+<!-- HEADER -->
+<header id="header">
+  <div class="logo">
+    <div class="logo-icon">⚡</div>
+    <span>City<strong>Fix</strong></span>
+  </div>
+
+  <div class="header-center">
+    <div class="status-pill">
+      <span class="pulse-dot"></span>
+      <span id="problemCount">Loading...</span>
+    </div>
+  </div>
+
+  <div class="header-actions">
+    <button class="btn-ghost" id="toggleSidebar">📋 Issues</button>
+    <button class="btn-primary" id="reportBtn">+ Report</button>
+  </div>
 </header>
 
-<!-- FULL SCREEN MAP -->
+<!-- MAP -->
 <div id="map"></div>
 
-<!-- FLOATING BUTTON -->
-<button id="reportBtn" class="floating-btn">+ Report Issue</button>
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h3>Reported Issues</h3>
+    <button class="close-sidebar" id="closeSidebar">✕</button>
+  </div>
+
+  <div class="filter-row">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="Road Damage">🔴 Road</button>
+    <button class="filter-btn" data-filter="Garbage">🟡 Garbage</button>
+    <button class="filter-btn" data-filter="Water Leakage">🟢 Water</button>
+    <button class="filter-btn" data-filter="Street Light">🔵 Light</button>
+  </div>
+
+  <div class="issues-list" id="issuesList">
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading issues...</p>
+    </div>
+  </div>
+</div>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- HINT TOAST -->
+<div class="hint-toast" id="hintToast">
+  <span>🗺️</span>
+  <span>Map pe click karke location select karo</span>
+</div>
 
 <!-- MODAL -->
 <div id="reportModal" class="modal">
+  <div class="modal-content">
 
-<div class="modal-content">
-<span id="closeModal" class="close-btn">❌</span>
-<h2>Report Issue</h2>
+    <div class="modal-header">
+      <div>
+        <h2>Report an Issue</h2>
+        <p class="modal-sub" id="modalLocation">📍 Location selected</p>
+      </div>
+      <button id="closeModal" class="close-btn">✕</button>
+    </div>
 
-<p style="font-size:14px;color:gray;">
-Map pe click karke location select karo, phir details bharo
-</p>
+    <form id="problemForm">
 
-<form id="problemForm">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" id="name" placeholder="e.g. Rahul Sharma" required>
+      </div>
 
-<input type="text" id="name" placeholder="Your Name" required>
+      <div class="form-group">
+        <label>Problem Type</label>
+        <div class="category-grid">
+          <label class="category-card">
+            <input type="radio" name="category" value="Road Damage" required>
+            <div class="card-inner">
+              <span class="cat-icon">🛣️</span>
+              <span>Road Damage</span>
+            </div>
+          </label>
+          <label class="category-card">
+            <input type="radio" name="category" value="Garbage">
+            <div class="card-inner">
+              <span class="cat-icon">🗑️</span>
+              <span>Garbage</span>
+            </div>
+          </label>
+          <label class="category-card">
+            <input type="radio" name="category" value="Water Leakage">
+            <div class="card-inner">
+              <span class="cat-icon">💧</span>
+              <span>Water Leakage</span>
+            </div>
+          </label>
+          <label class="category-card">
+            <input type="radio" name="category" value="Street Light">
+            <div class="card-inner">
+              <span class="cat-icon">💡</span>
+              <span>Street Light</span>
+            </div>
+          </label>
+        </div>
+      </div>
 
-<select id="category" required>
-<option value="">Select Problem</option>
-<option>Road Damage</option>
-<option>Garbage</option>
-<option>Water Leakage</option>
-<option>Street Light</option>
-</select>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id="description" placeholder="Problem ka thoda detail mein batao..." rows="3"></textarea>
+      </div>
 
-<textarea id="description" placeholder="Describe the problem" rows="3"></textarea>
+      <button type="submit" class="submit-btn" id="submitBtn">
+        <span id="submitText">Submit Report</span>
+        <div class="btn-loader" id="btnLoader" style="display:none"></div>
+      </button>
 
-<button type="submit">Submit</button>
-
-</form>
-
+    </form>
+  </div>
 </div>
 
+<!-- SUCCESS TOAST -->
+<div class="success-toast" id="successToast">
+  <span>✅</span>
+  <span>Problem report ho gayi!</span>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-title">Map Legend</div>
+  <div class="legend-item"><span class="dot red"></span> Road Damage</div>
+  <div class="legend-item"><span class="dot yellow"></span> Garbage</div>
+  <div class="legend-item"><span class="dot green"></span> Water Leakage</div>
+  <div class="legend-item"><span class="dot blue"></span> Street Light</div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="script.js"></script>
-
 </body>
 </html>
